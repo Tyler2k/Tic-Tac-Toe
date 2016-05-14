@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    $("#image").hide();
     var turns = 0;
     $(".square").hover(function() {
         $(this).css("background", "#85e085");
@@ -16,13 +17,14 @@ $(document).ready(function() {
             $(this).html(currentPlayer);
             if (checkForWin(board)) {
                 $("#status").html("Player " + currentPlayer + " Wins!");
+                sorry(currentPlayer);
             } else {
                 switchPlayer();
                 $("#status").html("Your turn player " + currentPlayer + "!");
             }
         }
         if (turns > 8) {
-             $("#status").html("You both lose...");   
+            $("#status").html("You both lose...");
         }
 
     });
@@ -41,6 +43,7 @@ function clearBoard() {
     currentPlayer = "X";
     $(".square").html("");
     $("#status").html("Your turn player X");
+    $("#image").hide();
 }
 
 function switchPlayer() {
@@ -71,4 +74,14 @@ function checkForWin(board) {
         return true;
     }
     return false;
+}
+
+function sorry(currentPlayer) {
+    if (currentPlayer === "X") {
+        $("#image").show();
+        $("#sorry").html("Sorry O...")
+    } else {
+        $("#image").show();
+        $("#sorry").html("Sorry X...")
+    }
 }
